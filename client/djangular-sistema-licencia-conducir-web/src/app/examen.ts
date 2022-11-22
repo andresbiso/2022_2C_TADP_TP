@@ -1,14 +1,18 @@
-export interface Answer {
-    answer: string,
-    is_correct: boolean;
+import * as internal from "stream";
+
+export interface Opcion {
+    id_opcion: number,
+    descripcion: string,
+    opcion_correcta: boolean;
   }
   
-  interface AnswerArray extends Array<Answer> { }
+interface OpcionArray extends Array<Opcion> { }
+
+export interface Pregunta {
+  id_pregunta: number,
+  descripcion: string,
+}
+
+export interface PreguntaArray extends Array<Pregunta> { }
+
   
-  export interface Question {
-    question: string,
-    category: string,
-    answers: AnswerArray
-  }
-  
-  export interface QuestionArray extends Array<Question> { }

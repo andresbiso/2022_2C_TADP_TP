@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ExamenService } from "../examen.service";
-import { Question, QuestionArray, Answer} from "../examen";
+import { Pregunta, PreguntaArray, Opcion} from "../examen";
 import { MatRadioChange } from "@angular/material/radio";
 
 @Component({
   selector: 'app-examen',
   templateUrl: './examen.component.html',
-  styleUrls: ['./examen.component.css']
+  styleUrls: ['./examen.component.scss']
 })
 export class ExamenComponent implements OnInit {
-  examenData: QuestionArray = [];
-  question: Question|null = null;
-  answer: Answer|null = null;
+  examenData: PreguntaArray = [];
+  question: Pregunta|null = null;
+  option: Opcion|null = null;
   disableRadioButtons: boolean = false;
   disableNextButton: boolean = true;
   questionNumber: number = 0;
@@ -43,25 +43,26 @@ export class ExamenComponent implements OnInit {
     } else {
       this.question = null;
     }
-    if (this.answer) {
+    if (this.option) {
       this.questionNumber++;
-      if (this.answer.is_correct) {
+      if (this.option.opcion_correcta) {
         this.correctAnswers++;
       }
     }
-    this.answer = null;
+    this.option = null;
     this.disableRadioButtons = false;
     this.disableNextButton = true; 
   }
 
-  getCorrectAnswer() {
+  getCorrectOption() {
     if (this.question) {
-      return this.question.answers.filter(answer => answer.is_correct)[0].answer;
+      return '';
+      //return this.question.answers.filter(answer => answer.is_correct)[0].answer;
     }
     return '';
   }
 
-  answerSelected(event: MatRadioChange) {
+  optionSelected(event: MatRadioChange) {
     this.disableRadioButtons = true;
     this.disableNextButton = false;
   }
